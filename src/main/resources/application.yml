@@ -1,0 +1,8 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+server:
+  servlet:
+    context-path: /
+  port: 8081
+
