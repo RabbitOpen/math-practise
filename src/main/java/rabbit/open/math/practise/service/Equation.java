@@ -3,7 +3,6 @@ package rabbit.open.math.practise.service;
 import rabbit.open.math.practise.exception.DeriveException;
 import rabbit.open.math.practise.exception.NotSupportedException;
 import rabbit.open.math.practise.service.impl.DeriveEquation;
-import rabbit.open.math.practise.service.impl.Minus;
 
 import java.util.ArrayList;
 import java.util.List;
