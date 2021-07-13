@@ -9,11 +9,22 @@ import java.util.Random;
  */
 public abstract class Equation {
 
+    // 等式的第一个参数
     protected Equation first;
 
+    // 等式的第二个参数
     protected Equation second;
 
+    // 等式的结果
+    protected Equation result;
+
+    // 父级等式
+    public Equation parent = null;
+
     protected boolean protectedEquation = false;
+
+    // 设置为X
+    protected boolean masked = false;
 
     public Equation() {
     }
@@ -21,6 +32,12 @@ public abstract class Equation {
     public Equation(Equation first, Equation second) {
         this.first = first;
         this.second = second;
+        injectParent();
+    }
+
+    protected void injectParent() {
+        this.second.parent = this;
+        this.first.parent = this;
     }
 
     public boolean isProtectedEquation() {
@@ -114,4 +131,21 @@ public abstract class Equation {
         }
     }
 
+    /**
+     * 生成反向分析文本（解题思路）
+     */
+    public List<String> generateReverseAnalyseText() {
+        return null;
+    }
+
+    public Equation derive() {
+        return null;
+    }
+
+    public void setMasked(boolean masked) {
+        this.masked = masked;
+        if (null != parent) {
+            parent.setMasked(masked);
+        }
+    }
 }

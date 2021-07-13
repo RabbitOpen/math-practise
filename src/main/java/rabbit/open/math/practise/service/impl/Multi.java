@@ -9,6 +9,7 @@ public class Multi extends Addition {
         super(first, second);
         makeSureFirstIsBigger();
         protectEquation();
+        injectParent();
     }
 
     protected void protectEquation() {
@@ -23,6 +24,7 @@ public class Multi extends Addition {
     public Multi() {
         first = random(60, 5);
         second = random(50, 10);
+        injectParent();
     }
 
     @Override

@@ -11,9 +11,11 @@ public class Addition extends Equation {
     public Addition(Equation first, Equation second) {
         super(first, second);
     }
+
     public Addition() {
         first = random(100, 10);
         second = random(50, 10);
+        injectParent();
     }
 
     protected NumberEquation random(int sed, int min) {

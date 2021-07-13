@@ -13,12 +13,14 @@ public class Division extends Multi {
             second = eSecond;
         }
         protectEquation();
+        injectParent();
     }
 
     public Division() {
         first = random(20, 10);
         second = random(20, 10);
         first = new NumberEquation(first.calc() * second.calc());
+        injectParent();
     }
 
     @Override

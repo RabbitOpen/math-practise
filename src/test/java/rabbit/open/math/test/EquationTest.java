@@ -69,4 +69,13 @@ public class EquationTest {
             System.out.println(new Addition(new Minus(), new Addition()).writeAsText());
         }
     }
+
+    @Test
+    public void reverseTest() {
+        Multi multi = new Multi(new Minus(new NumberEquation(15L), new NumberEquation(34L)), new NumberEquation(22L));
+        TestCase.assertEquals("22 * (34 - 15) = 418", multi.writeAsText());
+        multi.mask(1);
+        TestCase.assertEquals("22 * (X - 15) = 418", multi.writeAsText());
+
+    }
 }

@@ -11,12 +11,14 @@ public class Minus extends Addition {
         if (second instanceof Addition || second instanceof Minus) {
             second.setProtectedEquation(true);
         }
+        injectParent();
     }
 
     public Minus() {
         first = random(100, 20);
         second = random(100, 20);
         makeSureFirstIsBigger();
+        injectParent();
     }
 
     @Override
