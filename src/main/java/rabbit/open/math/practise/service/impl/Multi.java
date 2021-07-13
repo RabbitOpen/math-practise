@@ -36,4 +36,13 @@ public class Multi extends Addition {
     public Long calc() {
         return first.calc() * second.calc();
     }
+
+    @Override
+    public DeriveEquation doDerive() {
+        if (first.isMasked()) {
+            return new DeriveEquation(first, new Division(getResult(), second, false));
+        } else {
+            return new DeriveEquation(second, new Division(getResult(), first, false));
+        }
+    }
 }

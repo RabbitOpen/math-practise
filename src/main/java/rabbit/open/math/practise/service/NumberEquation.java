@@ -1,5 +1,7 @@
 package rabbit.open.math.practise.service;
 
+import rabbit.open.math.practise.exception.NotSupportedException;
+
 /**
  * 基础等式，等同long
  */

@@ -1,7 +1,7 @@
 package rabbit.open.math.practise.service.impl;
 
-import rabbit.open.math.practise.service.NumberEquation;
 import rabbit.open.math.practise.service.Equation;
+import rabbit.open.math.practise.service.NumberEquation;
 import rabbit.open.math.practise.service.Operator;
 
 import java.util.Random;
@@ -20,6 +20,15 @@ public class Addition extends Equation {
 
     protected NumberEquation random(int sed, int min) {
         return new NumberEquation(Long.valueOf(new Random().nextInt(sed) + min));
+    }
+
+    @Override
+    public DeriveEquation doDerive() {
+        if (first.isMasked()) {
+            return new DeriveEquation(first, new Minus(getResult(), second));
+        } else {
+            return new DeriveEquation(second, new Minus(getResult(), first));
+        }
     }
 
     @Override

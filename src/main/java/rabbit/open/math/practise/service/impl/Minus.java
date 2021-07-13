@@ -30,4 +30,13 @@ public class Minus extends Addition {
     public Long calc() {
         return first.calc() - second.calc();
     }
+
+    @Override
+    public DeriveEquation doDerive() {
+        if (first.isMasked()) {
+            return new DeriveEquation(first, new Addition(getResult(), second));
+        } else {
+            return new DeriveEquation(second, new Minus(getResult(), first));
+        }
+    }
 }

@@ -48,7 +48,7 @@ public class EquationTest {
         Equation mask1 = new Multi(new Minus(new NumberEquation(15L), new NumberEquation(34L)), new NumberEquation(22L)).mask(2);
         TestCase.assertEquals("15", mask1.getMaskedValue());
         TestCase.assertEquals("(22 + 18) * (34 - 15) = 760", new Multi(new Minus(new NumberEquation(15L), new NumberEquation(34L)),
-                    new Addition(new NumberEquation(22L), new NumberEquation(18L))).writeAsText());
+                new Addition(new NumberEquation(22L), new NumberEquation(18L))).writeAsText());
 
         // 除法
         TestCase.assertEquals("200 ÷ 20 = 10", new Division(new NumberEquation(10L), new NumberEquation(20L)).writeAsText());
@@ -71,11 +71,20 @@ public class EquationTest {
     }
 
     @Test
-    public void reverseTest() {
-        Multi multi = new Multi(new Minus(new NumberEquation(15L), new NumberEquation(34L)), new NumberEquation(22L));
-        TestCase.assertEquals("22 * (34 - 15) = 418", multi.writeAsText());
-        multi.mask(1);
-        TestCase.assertEquals("22 * (X - 15) = 418", multi.writeAsText());
-
+    public void deriveTest() {
+        Division division = new Division(new Addition(), new Minus());
+        division.randomMask();
+        System.out.println(division.writeAsText());
+        for (String s : division.derive().getDeriveEquationTextList()) {
+            System.out.println(s);
+        }
+        System.out.println("");
+        Multi multi = new Multi(new Addition(), new Minus());
+        multi.randomMask();
+        System.out.println(multi.writeAsText());
+        for (String s : multi.derive().getDeriveEquationTextList()) {
+            System.out.println(s);
+        }
     }
+
 }

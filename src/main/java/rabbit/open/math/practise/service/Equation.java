@@ -1,5 +1,10 @@
 package rabbit.open.math.practise.service;
 
+import rabbit.open.math.practise.exception.DeriveException;
+import rabbit.open.math.practise.exception.NotSupportedException;
+import rabbit.open.math.practise.service.impl.DeriveEquation;
+import rabbit.open.math.practise.service.impl.Minus;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -26,8 +31,7 @@ public abstract class Equation {
     // 设置为X
     protected boolean masked = false;
 
-    public Equation() {
-    }
+    public Equation() { }
 
     public Equation(Equation first, Equation second) {
         this.first = first;
@@ -107,7 +111,7 @@ public abstract class Equation {
         return firstText + getOperator().code + secondText + " = " + calc();
     }
 
-    protected String getText() {
+    public String getText() {
         if (this instanceof NumberEquation) {
             return writeAsText();
         } else {
@@ -132,14 +136,26 @@ public abstract class Equation {
     }
 
     /**
-     * 生成反向分析文本（解题思路）
+     * 演进转换
+     * @return
      */
-    public List<String> generateReverseAnalyseText() {
-        return null;
+    public DeriveEquation derive() {
+        if (!isMasked()) {
+            throw new DeriveException("equation should be masked before do this operation");
+        }
+        return doDerive();
     }
 
-    public Equation derive() {
-        return null;
+    protected DeriveEquation doDerive() {
+        throw new NotSupportedException();
+    }
+
+    protected Equation getResult() {
+        return new NumberEquation(calc());
+    }
+
+    public void setResult(Equation result) {
+        this.result = result;
     }
 
     public void setMasked(boolean masked) {
@@ -147,5 +163,9 @@ public abstract class Equation {
         if (null != parent) {
             parent.setMasked(masked);
         }
+    }
+
+    public boolean isMasked() {
+        return masked;
     }
 }
